@@ -5,6 +5,10 @@ import mainHomeIMG from './static/homeimagetxt.jpg';
 import homeImg1 from './static/slide1.jpg';
 import homeImg2 from './static/slide2.jpg';
 
+import rmMe from './static/rm-me.jpg'; 
+import saMe from './static/sa-me.jpg'; 
+import baMe from './static/ba-me.jpg'; 
+
 function HomeScreen() {
 
   useEffect(() => {
@@ -52,18 +56,24 @@ function HomeScreen() {
             </ul>
         </div>
     </div>
+    <h2 className='mainCatTitle'>Featured Posts</h2>
     <div className='homeCategories'>
         <div className='catObject'>
-          <h2 className='catTitle'>SWELL</h2>
-          <img src={homeImg2} className='catImg' alt="Swell"/>
+          <img src={rmMe} className='catImg' alt="Riviera Maya"/>
+          <div className='catBlock'>
+            <h2 className='catTitle'>Explore The Riviera Maya</h2>
+            <h2 className='catInfo'>Mexico's Paradise</h2>
+          </div>
         </div>
         <div className='catObject'>
-          <h2 className='catTitle'>SWELL</h2>
-          <img src={homeImg2} className='catImg' alt="Swell"/>
+          <img src={saMe} className='catImg' alt="San Andrés"/>
+          <h2 className='catTitle'>See San Andrés</h2>
+          <h2 className='catInfo'>Colombia's Best Beaches</h2>
         </div>
         <div className='catObject'>
-          <h2 className='catTitle'>SWELL</h2>
-          <img src={homeImg2} className='catImg' alt="Swell"/>
+          <img src={baMe} className='catImg' alt="Buenos Aires"/>
+          <h2 className='catTitle'>Tour Buenos Aires</h2>
+          <h2 className='catInfo'>Paris in South America</h2>
         </div>
       </div>
     <div className='featuredBlock'>
