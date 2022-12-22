@@ -13,12 +13,13 @@ html, body {
   background-color: rgb(13, 13, 13);
   width: 100%;
   padding-bottom: 2%;
+  text-align: left;
 }
 
 .footerItem {
   color: white;
   font-size: 25px;
-  margin-inline: 2%;
+  margin-inline: 3%;
   padding-top: 2%;
 }
 
@@ -185,6 +186,6 @@ html, body {
 .catImg:hover {
   transform: translate(0px, -4px);
   transition: 0.4s;
-  box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.34);
+  box-shadow: 10px 5px 5px rgba(0, 255, 255, 0.24);
 }
 /* HomeScreen Categories */
