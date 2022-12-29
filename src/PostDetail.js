@@ -69,22 +69,24 @@ function PostDetail( {...props} ) {
     {post.map((postInfo) => {
         return (
             <>
+              <img className='mainPostPhoto' src={postInfo.PostImg}/>
               <h2 className='mainCatTitle'>{postInfo.postName}</h2>
-              <div className='postsWrapper' >
+              <div className='postsWrapper'>
+                <p className='postParagraph'>{postInfo.PostParagraph1}</p>
               </div>
             </>
         )
     })}
-    <div className='commentsSection'>
     {comments.map((comment) => {
         return (
             <>
+            <div className='commentsSection'>
               <h2 className='commentName'>{comment.username}</h2>
               <h2 className='commentBody'>{comment.commentBody}</h2>
+            </div>
             </>
         )
     })}
-    </div>
     <div className='footer'>
         <h2 className='footerItem'>Latin Nomad</h2>
       </div>
