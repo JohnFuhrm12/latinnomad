@@ -49,9 +49,10 @@ function Posts( {...props} ) {
         window.location.reload(true);
     }
 
-    function seeDetail() {
+    function seeDetail(e) {
       props.setPosts(false);
-      props.setPostDetail(true)
+      props.setPostDetail(true);
+      props.setCurrentPost(e.currentTarget.title);
   }
 
   return (
@@ -70,7 +71,7 @@ function Posts( {...props} ) {
         return (
             <>
               <div className='postsWrapper' >
-                <img onClick={seeDetail} className='catImg' src={post.PostImg}/>
+                <img onClick={seeDetail} className='catImg' src={post.PostImg} title={post.postName}/>
                 <h2 className='postName'>{post.postName}</h2>
               </div>
             </>

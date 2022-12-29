@@ -15,6 +15,7 @@ function App() {
   const [destinations, setDestinations] = useState(false);
   const [about, setAbout] = useState(false);
   const [postDetail, setPostDetail] = useState(false);
+  const [currentPost, setCurrentPost] = useState(false);
 
   const props = { 
     home,
@@ -28,7 +29,9 @@ function App() {
     posts,
     setPosts,
     postDetail,
-    setPostDetail
+    setPostDetail,
+    currentPost,
+    setCurrentPost
   }
 
   return (

@@ -31,18 +31,18 @@ const db = firebase.firestore();
 
 function PostDetail( {...props} ) {
 
-    const [posts, setPosts] = useState([]);
+    const [post, setPost] = useState([]);
 
     useEffect(() => {     
       getDbmessages();
-  }, []);
+    }, []);
 
   const postsRef = collection(db, "posts");
 
   const getDbmessages = async () => {
-    const postsRefer = query(postsRef);
+    const postsRefer = query(postsRef, where('postName', '==', props.currentPost));
     const currentQuerySnapshot = await getDocs(postsRefer);
-    setPosts(currentQuerySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+    setPost(currentQuerySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
   };
 
     function refresh() {
@@ -60,13 +60,11 @@ function PostDetail( {...props} ) {
             <h1 className='navbarItem'>About</h1>
         </div>
     </div>
-    <h2 className='mainCatTitle'>Post Name</h2>
-    {posts.map((post) => {
+    {post.map((postInfo) => {
         return (
             <>
+              <h2 className='mainCatTitle'>{postInfo.postName}</h2>
               <div className='postsWrapper' >
-                <img className='catImg' src={post.PostImg}/>
-                <h2 className='postName'>{post.postName}</h2>
               </div>
             </>
         )
