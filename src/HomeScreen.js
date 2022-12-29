@@ -9,7 +9,7 @@ import rmMe from './static/rm-me.jpg';
 import saMe from './static/sa-me.jpg'; 
 import baMe from './static/ba-me.jpg'; 
 
-function HomeScreen() {
+function HomeScreen( {...props} ) {
 
   useEffect(() => {
     const buttons = document.querySelectorAll("[data-carousel-button]")
@@ -34,12 +34,17 @@ function HomeScreen() {
         window.location.reload(true);
     }
 
+    function seeStart() {
+      props.setHome(false);
+      props.setStart(true);
+    }
+
   return (
     <div className='page'>
     <div className='navbar'>
         <h1 onClick={refresh} className='navHome'>Latin Nomad</h1>
         <div className='navbarRight'>
-            <h1 className='navbarItem'>Start Here</h1>
+            <h1 onClick={seeStart} className='navbarItem'>Start Here</h1>
             <h1 className='navbarItem'>Posts</h1>
             <h1 className='navbarItem'>Destinations</h1>
             <h1 className='navbarItem'>About</h1>

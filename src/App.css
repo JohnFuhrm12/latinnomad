@@ -189,3 +189,25 @@ html, body {
   box-shadow: 10px 5px 5px rgba(0, 255, 255, 0.24);
 }
 /* HomeScreen Categories */
+
+/* StartScreen */
+.headerIMG {
+  display: block;
+  width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.paragraphBlock {
+  max-width: 70%;
+  margin: 0 auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.headerParagraph {
+  color: white;
+  font-size: 28px;
+}
+/* StartScreen */
