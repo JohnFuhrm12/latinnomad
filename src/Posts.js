@@ -31,9 +31,28 @@ const db = firebase.firestore();
 
 function Posts( {...props} ) {
 
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {     
+      getDbmessages();
+  }, []);
+
+  const postsRef = collection(db, "posts");
+
+  const getDbmessages = async () => {
+    const postsRefer = query(postsRef);
+    const currentQuerySnapshot = await getDocs(postsRefer);
+    setPosts(currentQuerySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+  };
+
     function refresh() {
         window.location.reload(true);
     }
+
+    function seeDetail() {
+      props.setPosts(false);
+      props.setPostDetail(true)
+  }
 
   return (
     <div className='page'>
@@ -46,22 +65,17 @@ function Posts( {...props} ) {
             <h1 className='navbarItem'>About</h1>
         </div>
     </div>
-    <img className='headerIMG' src={aboutMain}/>
     <h2 className='mainCatTitle'>Posts</h2>
-    <div className='aboutWrapper'>
-        <div className='aboutBlock'>
-            <div className='aboutBlockText'>
-                <p className='aboutTxt'>I'm John. I was born in New Jersey, but after a family vacation in Costa Rica, I realized that there were more interesting places to be in the world. Namely, Latin America.</p>
-            </div>
-            <img className='catImg' src={profilePic}></img>
-        </div>
-        <div className='aboutBlock'>
-            <div className='aboutBlockText'>
-                <p className='aboutTxt'>I'm not Latin myself, I just love traveling the region! After making that first trip I was hooked, I quickly learnt Spanish as I knew my future involved a whole lot of being around Spanish speakers. At 19 years old, I took on a real challenge, a solo trip to Colombia, with no return ticket.</p>
-            </div>
-            <img className='catImg' src={pyramidMe}></img>
-        </div>
-    </div>
+    {posts.map((post) => {
+        return (
+            <>
+              <div className='postsWrapper' >
+                <img onClick={seeDetail} className='catImg' src={post.PostImg}/>
+                <h2 className='postName'>{post.postName}</h2>
+              </div>
+            </>
+        )
+    })}
     <div className='footer'>
         <h2 className='footerItem'>Latin Nomad</h2>
       </div>

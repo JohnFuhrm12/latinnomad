@@ -39,6 +39,11 @@ function HomeScreen( {...props} ) {
       props.setStart(true);
     }
 
+    function seePosts() {
+      props.setHome(false);
+      props.setPosts(true);
+    }
+
     function seeDestinations() {
       props.setHome(false);
       props.setDestinations(true);
@@ -55,7 +60,7 @@ function HomeScreen( {...props} ) {
         <h1 onClick={refresh} className='navHome'>Latin Nomad</h1>
         <div className='navbarRight'>
             <h1 onClick={seeStart} className='navbarItem'>Start Here</h1>
-            <h1 className='navbarItem'>Posts</h1>
+            <h1 onClick={seePosts} className='navbarItem'>Posts</h1>
             <h1 onClick={seeDestinations} className='navbarItem'>Destinations</h1>
             <h1 onClick={seeAbout} className='navbarItem'>About</h1>
         </div>
