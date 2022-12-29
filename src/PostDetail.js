@@ -32,17 +32,23 @@ const db = firebase.firestore();
 function PostDetail( {...props} ) {
 
     const [post, setPost] = useState([]);
+    const [comments, setComments] = useState([]);
 
     useEffect(() => {     
       getDbmessages();
     }, []);
 
   const postsRef = collection(db, "posts");
+  const commentsRef = collection(db, "comments");
 
   const getDbmessages = async () => {
     const postsRefer = query(postsRef, where('postName', '==', props.currentPost));
     const currentQuerySnapshot = await getDocs(postsRefer);
     setPost(currentQuerySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+
+    const commentsRefer = query(commentsRef, where('post', '==', props.currentPost));
+    const currentQuerySnapshotC = await getDocs(commentsRefer);
+    setComments(currentQuerySnapshotC.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
   };
 
     function refresh() {
@@ -69,6 +75,16 @@ function PostDetail( {...props} ) {
             </>
         )
     })}
+    <div className='commentsSection'>
+    {comments.map((comment) => {
+        return (
+            <>
+              <h2 className='commentName'>{comment.username}</h2>
+              <h2 className='commentBody'>{comment.commentBody}</h2>
+            </>
+        )
+    })}
+    </div>
     <div className='footer'>
         <h2 className='footerItem'>Latin Nomad</h2>
       </div>
