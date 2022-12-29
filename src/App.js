@@ -7,6 +7,7 @@ import Posts from './Posts';
 import Destinations from './Destinations';
 import About from './About';
 import PostDetail from './PostDetail';
+import Admin from './Admin';
 
 function App() {
   const [home, setHome] = useState(true);
@@ -14,6 +15,9 @@ function App() {
   const [posts, setPosts] = useState(false);
   const [destinations, setDestinations] = useState(false);
   const [about, setAbout] = useState(false);
+
+  const [admin, setAdmin] = useState(false);
+
   const [postDetail, setPostDetail] = useState(false);
   const [currentPost, setCurrentPost] = useState(false);
 
@@ -31,7 +35,9 @@ function App() {
     postDetail,
     setPostDetail,
     currentPost,
-    setCurrentPost
+    setCurrentPost,
+    admin,
+    setAdmin
   }
 
   return (
@@ -42,6 +48,7 @@ function App() {
       {destinations ? <Destinations {...props}/> : <></>}
       {about ? <About {...props}/> : <></>}
       {postDetail ? <PostDetail {...props}/> : <></>}
+      {admin ? <Admin {...props}/> : <></>}
     </>
   );
 }

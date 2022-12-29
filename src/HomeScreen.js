@@ -54,6 +54,11 @@ function HomeScreen( {...props} ) {
       props.setAbout(true);
     }
 
+    function seeAdmin() {
+      props.setHome(false);
+      props.setAdmin(true);
+    }
+
   return (
     <div className='page'>
     <div className='navbar'>
@@ -100,7 +105,7 @@ function HomeScreen( {...props} ) {
 
     </div>
     <div className='footer'>
-        <h2 className='footerItem'>Latin Nomad</h2>
+        <h2 onClick={seeAdmin} className='footerItem'>Latin Nomad</h2>
       </div>
     </div>
   );
