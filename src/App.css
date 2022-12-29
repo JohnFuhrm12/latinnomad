@@ -211,3 +211,29 @@ html, body {
   font-size: 28px;
 }
 /* StartScreen */
+
+/* AboutScreen */
+.aboutWrapper {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.aboutBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around
+}
+
+.aboutBlock {
+  max-width: 100%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+.aboutTxt {
+  color: white;
+  font-size: 28px;
+  margin-inline: 15%;
+  margin-top: 10%;
+}
+/* AboutScreen */

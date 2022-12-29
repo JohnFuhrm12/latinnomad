@@ -39,6 +39,16 @@ function HomeScreen( {...props} ) {
       props.setStart(true);
     }
 
+    function seeDestinations() {
+      props.setHome(false);
+      props.setDestinations(true);
+    }
+
+    function seeAbout() {
+      props.setHome(false);
+      props.setAbout(true);
+    }
+
   return (
     <div className='page'>
     <div className='navbar'>
@@ -46,8 +56,8 @@ function HomeScreen( {...props} ) {
         <div className='navbarRight'>
             <h1 onClick={seeStart} className='navbarItem'>Start Here</h1>
             <h1 className='navbarItem'>Posts</h1>
-            <h1 className='navbarItem'>Destinations</h1>
-            <h1 className='navbarItem'>About</h1>
+            <h1 onClick={seeDestinations} className='navbarItem'>Destinations</h1>
+            <h1 onClick={seeAbout} className='navbarItem'>About</h1>
         </div>
     </div>
     <div className='carouselBlock'>
