@@ -60,6 +60,39 @@ function Admin( {...props} ) {
     const [para6, setPara6] = useState('');
     const [imageUrl5, setImageUrl5] = useState();
 
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [realUsername, setRealUsername] = useState('');
+  const [realPassword, setRealPassword] = useState('');
+
+  const [credentials, setCredentials] = useState([]);
+  const [error, setError] = useState(false);
+
+  const credentialsRef = collection(db, "admin");
+
+  const getCredentials = async () => {
+    const usernameRef = query(credentialsRef);
+    const currentQuerySnapshot = await getDocs(usernameRef);
+    setCredentials(currentQuerySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+  };
+
+  const getReal = async () => {
+    credentials.map((cred) => {
+      setRealUsername(cred.username);
+      setRealPassword(cred.password);
+    });
+  };
+
+    useEffect(() => {     
+        getCredentials();
+        getReal();
+    }, []);
+
+    useEffect(() => {
+      getReal();
+    });
+
   const addPost = async (e) => {
     e.preventDefault();
     await setDoc(doc(db, 'posts', title), {
@@ -149,6 +182,21 @@ function Admin( {...props} ) {
       props.setAbout(true);
     }
 
+    function login(e) {
+      if (username === realUsername && password === realPassword) {
+        props.setAdminAccess(true);
+      }
+      else {
+        setError(true);
+        e.preventDefault();
+      };
+    };
+  
+    function logout() {
+      props.setAdminAccess(false);
+      window.location.reload(false);
+    };
+
   return (
     <div className='page'>
     <div className='navbar'>
@@ -160,6 +208,10 @@ function Admin( {...props} ) {
             <h1 onClick={seeAbout} className='navbarItem'>About</h1>
         </div>
     </div>
+    {props.adminAccess ? 
+    <>
+    <h2 className='adminAccessTitle'>Logout</h2>
+    <button className='logoutButton' onClick={logout}>Logout</button> 
     <h2 className='mainCatTitle'>Add Post</h2>
     <div>
         <form className='adminAddForm' onSubmit={addPost}>
@@ -243,6 +295,19 @@ function Admin( {...props} ) {
                 <button className='adminAddButton'>Post</button>
         </form>
     </div>
+    </>
+    : 
+    <>
+        <h2 className='adminAccessTitle'>Admin Access</h2>
+        {error ? <h1 className='errorMessage'>Username or password is incorrect!</h1> : <></>}
+        <form onChange={() => {setError(false)}} onSubmit={login} className='AdminLoginForm'>
+            <label className='username' for="username">Username:</label>
+            <input onChange={(e) => {setUsername(e.target.value)}} className='usernameInput' name='username' value={username}></input>
+            <label className='password' for="password">Password:</label>
+            <input onChange={(e) => {setPassword(e.target.value)}} className='passwordInput' name='username' value={password}></input>
+            <button className='loginButton'>Access</button>
+        </form>
+        </>}
     <div className='footer'>
         <h2 className='footerItem'>Latin Nomad</h2>
       </div>

@@ -309,6 +309,29 @@ html, body {
 .adminAddButton {
   margin-top: 5%;
 }
+
+.adminAccessTitle {
+  color: white;
+}
+
+.errorMessage {
+  color: red;
+}
+
+.AdminLoginForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 30vw;
+  margin: 0 auto;
+}
+
+.username {
+  color: white;
+}
+
+.password {
+  color: white;
+}
 /* Admin */
 
 /* Comments */

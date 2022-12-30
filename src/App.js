@@ -17,6 +17,7 @@ function App() {
   const [about, setAbout] = useState(false);
 
   const [admin, setAdmin] = useState(false);
+  const [adminAccess, setAdminAccess] = useState(false);
 
   const [postDetail, setPostDetail] = useState(false);
   const [currentPost, setCurrentPost] = useState(false);
@@ -37,7 +38,9 @@ function App() {
     currentPost,
     setCurrentPost,
     admin,
-    setAdmin
+    setAdmin,
+    adminAccess,
+    setAdminAccess
   }
 
   return (
