@@ -59,6 +59,12 @@ function HomeScreen( {...props} ) {
       props.setAdmin(true);
     }
 
+    function seeDetail(e) {
+      props.setHome(false);
+      props.setPostDetail(true);
+      props.setCurrentPost(e.currentTarget.title);
+  }
+
   return (
     <div className='page'>
     <div className='navbar'>
@@ -84,19 +90,19 @@ function HomeScreen( {...props} ) {
     <h2 className='mainCatTitle'>Featured Posts</h2>
     <div className='homeCategories'>
         <div className='catObject'>
-          <img src={rmMe} className='catImg' alt="Riviera Maya"/>
+          <img onClick={seeDetail} title='Explore The Riviera Maya' src={rmMe} className='catImg' alt="Riviera Maya"/>
           <div className='catBlock'>
             <h2 className='catTitle'>Explore The Riviera Maya</h2>
             <h2 className='catInfo'>Mexico's Paradise</h2>
           </div>
         </div>
         <div className='catObject'>
-          <img src={saMe} className='catImg' alt="San Andrés"/>
+          <img onClick={seeDetail} title='See San Andrés' src={saMe} className='catImg' alt="San Andrés"/>
           <h2 className='catTitle'>See San Andrés</h2>
           <h2 className='catInfo'>Colombia's Best Beaches</h2>
         </div>
         <div className='catObject'>
-          <img src={baMe} className='catImg' alt="Buenos Aires"/>
+          <img onClick={seeDetail} title='Tour Buenos Aires' src={baMe} className='catImg' alt="Buenos Aires"/>
           <h2 className='catTitle'>Tour Buenos Aires</h2>
           <h2 className='catInfo'>Paris in South America</h2>
         </div>

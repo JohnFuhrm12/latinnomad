@@ -129,21 +129,35 @@ function Admin( {...props} ) {
         window.location.reload(true);
     }
 
-    function seeDetail(e) {
-      props.setPosts(false);
-      props.setPostDetail(true);
-      props.setCurrentPost(e.currentTarget.title);
-  }
+    function seeStart() {
+      props.setAdmin(false);
+      props.setStart(true);
+    }
+
+    function seePosts() {
+      props.setAdmin(false);
+      props.setPosts(true);
+    }
+
+    function seeDestinations() {
+      props.setAdmin(false);
+      props.setDestinations(true);
+    }
+
+    function seeAbout() {
+      props.setAdmin(false);
+      props.setAbout(true);
+    }
 
   return (
     <div className='page'>
     <div className='navbar'>
         <h1 onClick={refresh} className='navHome'>Latin Nomad</h1>
         <div className='navbarRight'>
-            <h1 className='navbarItem'>Start Here</h1>
-            <h1 className='navbarItem'>Posts</h1>
-            <h1 className='navbarItem'>Destinations</h1>
-            <h1 className='navbarItem'>About</h1>
+            <h1 onClick={seeStart} className='navbarItem'>Start Here</h1>
+            <h1 onClick={seePosts} className='navbarItem'>Posts</h1>
+            <h1 onClick={seeDestinations} className='navbarItem'>Destinations</h1>
+            <h1 onClick={seeAbout} className='navbarItem'>About</h1>
         </div>
     </div>
     <h2 className='mainCatTitle'>Add Post</h2>

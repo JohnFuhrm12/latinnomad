@@ -49,6 +49,21 @@ function Posts( {...props} ) {
         window.location.reload(true);
     }
 
+    function seeStart() {
+      props.setPosts(false);
+      props.setStart(true);
+    }
+
+    function seeDestinations() {
+      props.setPosts(false);
+      props.setDestinations(true);
+    }
+
+    function seeAbout() {
+      props.setPosts(false);
+      props.setAbout(true);
+    }
+
     function seeDetail(e) {
       props.setPosts(false);
       props.setPostDetail(true);
@@ -60,10 +75,10 @@ function Posts( {...props} ) {
     <div className='navbar'>
         <h1 onClick={refresh} className='navHome'>Latin Nomad</h1>
         <div className='navbarRight'>
-            <h1 className='navbarItem'>Start Here</h1>
+            <h1 onClick={seeStart} className='navbarItem'>Start Here</h1>
             <h1 className='navbarItem'>Posts</h1>
-            <h1 className='navbarItem'>Destinations</h1>
-            <h1 className='navbarItem'>About</h1>
+            <h1 onClick={seeDestinations} className='navbarItem'>Destinations</h1>
+            <h1 onClick={seeAbout} className='navbarItem'>About</h1>
         </div>
     </div>
     <h2 className='mainCatTitle'>Posts</h2>

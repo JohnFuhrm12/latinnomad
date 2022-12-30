@@ -210,6 +210,14 @@ html, body {
   color: white;
   font-size: 28px;
 }
+
+.postsWrapperStart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  max-width: 80vw;
+  margin: 0 auto;
+}
 /* StartScreen */
 
 /* AboutScreen */
@@ -276,6 +284,11 @@ html, body {
   border: solid 3px aqua;
   border-radius: 5px;
   padding: 5px;
+  margin-bottom: 6%;
+}
+
+.postName {
+  color: white;
   margin-bottom: 6%;
 }
 /* Posts */

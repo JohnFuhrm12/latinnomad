@@ -16,14 +16,29 @@ function About( {...props} ) {
         window.location.reload(true);
     }
 
+    function seeStart() {
+        props.setAbout(false);
+        props.setStart(true);
+      }
+  
+      function seePosts() {
+        props.setAbout(false);
+        props.setPosts(true);
+      }
+  
+      function seeDestinations() {
+        props.setAbout(false);
+        props.setDestinations(true);
+      }
+
   return (
     <div className='page'>
     <div className='navbar'>
         <h1 onClick={refresh} className='navHome'>Latin Nomad</h1>
         <div className='navbarRight'>
-            <h1 className='navbarItem'>Start Here</h1>
-            <h1 className='navbarItem'>Posts</h1>
-            <h1 className='navbarItem'>Destinations</h1>
+            <h1 onClick={seeStart} className='navbarItem'>Start Here</h1>
+            <h1 onClick={seePosts} className='navbarItem'>Posts</h1>
+            <h1 onClick={seeDestinations} className='navbarItem'>Destinations</h1>
             <h1 className='navbarItem'>About</h1>
         </div>
     </div>
