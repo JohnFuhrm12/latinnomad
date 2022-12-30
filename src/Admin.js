@@ -70,6 +70,13 @@ function Admin( {...props} ) {
   const [error, setError] = useState(false);
 
   const credentialsRef = collection(db, "admin");
+  const postsRef = collection(db, "posts");
+
+  const getDbmessages = async () => {
+    const postsRefer = query(postsRef);
+    const currentQuerySnapshot = await getDocs(postsRefer);
+    setPosts(currentQuerySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+  };
 
   const getCredentials = async () => {
     const usernameRef = query(credentialsRef);
@@ -87,6 +94,7 @@ function Admin( {...props} ) {
     useEffect(() => {     
         getCredentials();
         getReal();
+        getDbmessages();
     }, []);
 
     useEffect(() => {
@@ -197,6 +205,11 @@ function Admin( {...props} ) {
       window.location.reload(false);
     };
 
+    const deletePost = async (e) => {
+      let postid = e.currentTarget.title;
+      deleteDoc(doc(db, 'posts', postid));
+    }
+
   return (
     <div className='page'>
     <div className='navbar'>
@@ -212,7 +225,7 @@ function Admin( {...props} ) {
     <>
     <h2 className='adminAccessTitle'>Logout</h2>
     <button className='logoutButton' onClick={logout}>Logout</button> 
-    <h2 className='mainCatTitle'>Add Post</h2>
+    <h2 className='mainCatTitle'>Add/Edit Post</h2>
     <div>
         <form className='adminAddForm' onSubmit={addPost}>
             <label className='adminAddLabel' for="category">Country:</label>
@@ -294,6 +307,17 @@ function Admin( {...props} ) {
 
                 <button className='adminAddButton'>Post</button>
         </form>
+        <h2 className='mainCatTitle'>Delete Post</h2>
+        {posts.map((post) => {
+          return (
+              <>
+                <div className='postsWrapper' >
+                  <h2 className='postName'>{post.postName}</h2>
+                  <h2 onClick={deletePost} className='delete' title={post.id}>X</h2>
+                </div>
+              </>
+          )
+      })}
     </div>
     </>
     : 

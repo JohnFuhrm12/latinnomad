@@ -430,6 +430,18 @@ html, body {
 }
 /* Comments */
 
+.delete {
+  color: white;
+  cursor: pointer;
+  width: 30px;
+  margin: 0 auto;
+  margin-top: -5%;
+}
+
+.delete:hover {
+  color: red;
+}
+
 @media (max-width: 650px) {
   .carousel {
     margin-bottom: -90%;
