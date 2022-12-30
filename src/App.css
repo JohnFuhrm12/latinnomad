@@ -310,3 +310,99 @@ html, body {
   margin-top: 5%;
 }
 /* Admin */
+
+/* Comments */
+.commentsSection {
+  background-color: rgb(23, 23, 23);
+  max-width: 60vw;
+  margin: 0 auto;
+  padding-top: 1%;
+  padding-bottom: 5%;
+}
+
+.commentsTitle {
+  color: white;
+  font-size: 40px;
+}
+
+.addCommentForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 25vw;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.addCommentLabel {
+  color: white;
+  font-size: 22px;
+  margin-top: 20px;
+}
+
+.commentNameInput {
+  margin-top: 3%;
+  font-size: 20px;
+  padding: 5px;
+  border: solid 4px black;
+}
+
+.commentBodyTxtArea {
+  margin-top: 3%;
+  min-height: 10vh;
+  max-height: 30vh;
+  font-size: 20px;
+  padding: 5px;
+  resize: vertical;
+  border: solid 4px black;
+}
+
+.commentAddButton {
+  margin: 0 auto;
+  margin-top: 4%;
+  max-width: 20vw;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 10px;
+  border: solid 4px black;
+  transition: 0.5s;
+}
+
+.commentAddButton:hover {
+  transition: 0.5s;
+  border: solid 4px rgb(0, 191, 191);
+  background-color: rgb(169, 169, 169);
+}
+
+.commentWrapper {
+  border-bottom: solid 2px white;
+  max-width: 25vw;
+  margin: 0 auto;
+}
+
+.commentReplyWrapper {
+  border-bottom: solid 2px white;
+  max-width: 25vw;
+  margin: 0 auto;
+  margin-right: 20%;
+}
+
+.commentName {
+  color: white;
+}
+
+.commentBody {
+  color: white;
+}
+
+.replyPrompt {
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  transition: 0.5s;
+}
+
+.replyPrompt:hover {
+  color: aqua;
+  transition: 0.5s;
+}
+/* Comments */

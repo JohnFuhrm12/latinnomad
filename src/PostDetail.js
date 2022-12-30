@@ -14,7 +14,7 @@ import startMain from './static/startMain.jpg';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
-import { collection, doc, setDoc, deleteDoc, getDocs, query, where, limit } from "firebase/firestore";
+import { collection, doc, setDoc, deleteDoc, getDocs, query, where, orderBy, limit } from "firebase/firestore";
 
 // Initialize Firebase Database
 firebase.initializeApp({
@@ -33,6 +33,17 @@ function PostDetail( {...props} ) {
 
     const [post, setPost] = useState([]);
     const [comments, setComments] = useState([]);
+    const [commentReplies, setCommentReplies] = useState([]);
+
+    const [newCommentUserName, setNewCommentUserName] = useState('');
+    const [newCommentBody, setNewCommentBody] = useState('');
+
+    const [newReplyUserName, setNewReplyUserName] = useState('');
+    const [newReplyBody, setNewReplyBody] = useState('');
+
+    const [replyFormVisible, setReplyFormVisible] = useState(false);
+
+    let today = new Date().toLocaleDateString();
 
     useEffect(() => {     
       getDbmessages();
@@ -40,6 +51,7 @@ function PostDetail( {...props} ) {
 
   const postsRef = collection(db, "posts");
   const commentsRef = collection(db, "comments");
+  const commentRepliesRef = collection(db, "commentReplies");
 
   const getDbmessages = async () => {
     const postsRefer = query(postsRef, where('postName', '==', props.currentPost));
@@ -49,6 +61,38 @@ function PostDetail( {...props} ) {
     const commentsRefer = query(commentsRef, where('post', '==', props.currentPost));
     const currentQuerySnapshotC = await getDocs(commentsRefer);
     setComments(currentQuerySnapshotC.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+
+    const commentsRepliesRefer = query(commentRepliesRef, where('post', '==', props.currentPost));
+    const currentQuerySnapshotCR = await getDocs(commentsRepliesRefer);
+    setCommentReplies(currentQuerySnapshotCR.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
+  };
+
+  const addComment = async (e) => {
+    e.preventDefault();
+    await setDoc(doc(db, 'comments', newCommentUserName + Math.random()), {
+      username: newCommentUserName,
+      commentBody: newCommentBody,
+      post: props.currentPost,
+      dateCreated: today
+    });
+    setNewCommentUserName('');
+    setNewCommentBody('');
+    getDbmessages();
+  };
+
+  const addReply = async (e) => {
+    const commentId = e.currentTarget.title;
+    e.preventDefault();
+    await setDoc(doc(db, 'commentReplies', newReplyUserName + Math.random()), {
+      username: newReplyUserName,
+      commentBody: newReplyBody,
+      comment: commentId,
+      post: props.currentPost,
+      dateCreated: today
+    });
+    setNewReplyUserName('');
+    setNewReplyBody('');
+    getDbmessages();
   };
 
     function refresh() {
@@ -73,6 +117,14 @@ function PostDetail( {...props} ) {
     function seeAbout() {
       props.setPostDetail(false);
       props.setAbout(true);
+    }
+
+    function showReplyForm() {
+      if (replyFormVisible) {
+        setReplyFormVisible(false);
+      } else {
+        setReplyFormVisible(true);
+      }
     }
 
   return (
@@ -114,16 +166,49 @@ function PostDetail( {...props} ) {
             </>
         )
     })}
-    {comments.map((comment) => {
-        return (
-            <>
-            <div className='commentsSection'>
-              <h2 className='commentName'>{comment.username}</h2>
-              <h2 className='commentBody'>{comment.commentBody}</h2>
-            </div>
-            </>
-        )
-    })}
+    <div className='commentsSection'>
+      <h2 className='commentsTitle'>Leave a Comment</h2>
+      <form className='addCommentForm' onSubmit={addComment}>
+        <label className='addCommentLabel' for="commentUserName">Name:</label>
+        <input className='commentNameInput' onChange={(e) => {setNewCommentUserName(e.target.value)}} name='commentUserName' value={newCommentUserName}/>
+        <label className='addCommentLabel' for="commentBodyTextArea">Comment:</label>
+        <textarea className='commentBodyTxtArea' onChange={(e) => {setNewCommentBody(e.target.value)}} name='commentBodyTextArea' value={newCommentBody}/>
+        <button className='commentAddButton'>Post Comment</button>
+      </form>
+      {comments.map((comment) => {
+        let commentId = comment.id;
+          return (
+              <>
+              <div className='commentWrapper'>
+                <h2 className='commentName'>{comment.username} on {comment.dateCreated}:</h2>
+                <h2 className='commentBody'>{comment.commentBody}</h2>
+                {replyFormVisible ? <h2 onClick={showReplyForm} className='replyPrompt'>Close Reply</h2> : <h2 onClick={showReplyForm} className='replyPrompt'>Reply</h2>}
+                {replyFormVisible ? <form className='addCommentForm' onSubmit={addReply} title={commentId}>
+                  <label className='addCommentLabel' for="commentUserName">Name:</label>
+                  <input className='commentNameInput' onChange={(e) => {setNewReplyUserName(e.target.value)}} name='commentUserName' value={newReplyUserName}/>
+                  <label className='addCommentLabel' for="commentBodyTextArea">Comment:</label>
+                  <textarea className='commentBodyTxtArea' onChange={(e) => {setNewReplyBody(e.target.value)}} name='commentBodyTextArea' value={newReplyBody}/>
+                  <button className='commentAddButton'>Post Reply</button>
+                </form> : <></>}
+              </div>
+              <div className='commentRepliesWrapper'>
+                {commentReplies.map((reply) => {
+                  return (
+                    <>
+                    {reply.comment === comment.id ? 
+                    <div className='commentReplyWrapper'>
+                      <h2 className='commentName'>{reply.username} replied on {reply.dateCreated}:</h2>
+                      <h2 className='commentBody'>{reply.commentBody}</h2>
+                    </div>
+                    : <></>}
+                    </>
+                  )
+                })}
+              </div>
+              </>
+          )
+      })}
+    </div>
     <div className='footer'>
         <h2 className='footerItem'>Latin Nomad</h2>
       </div>
