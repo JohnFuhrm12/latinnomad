@@ -107,9 +107,6 @@ function HomeScreen( {...props} ) {
           <h2 className='catInfo'>Paris in South America</h2>
         </div>
       </div>
-    <div className='featuredBlock'>
-
-    </div>
     <div className='footer'>
         <h2 onClick={seeAdmin} className='footerItem'>Latin Nomad</h2>
       </div>

@@ -82,16 +82,18 @@ function Posts( {...props} ) {
         </div>
     </div>
     <h2 className='mainCatTitle'>Posts</h2>
-    {posts.map((post) => {
-        return (
-            <>
-              <div className='postsWrapper' >
-                <img onClick={seeDetail} className='catImg' src={post.headerImg} title={post.postName}/>
-                <h2 className='postName'>{post.postName}</h2>
-              </div>
-            </>
-        )
-    })}
+    <div className='postsContainer'>
+      {posts.map((post) => {
+          return (
+              <>
+                <div className='postsWrapper' >
+                  <img onClick={seeDetail} className='catImg' src={post.headerImg} title={post.postName}/>
+                  <h2 className='postName'>{post.postName}</h2>
+                </div>
+              </>
+          )
+      })}
+    </div>
     <div className='footer'>
         <h2 className='footerItem'>Latin Nomad</h2>
       </div>
