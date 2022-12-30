@@ -71,7 +71,7 @@ function Posts( {...props} ) {
         return (
             <>
               <div className='postsWrapper' >
-                <img onClick={seeDetail} className='catImg' src={post.PostImg} title={post.postName}/>
+                <img onClick={seeDetail} className='catImg' src={post.headerImg} title={post.postName}/>
                 <h2 className='postName'>{post.postName}</h2>
               </div>
             </>

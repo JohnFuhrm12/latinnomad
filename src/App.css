@@ -239,7 +239,61 @@ html, body {
 /* AboutScreen */
 
 /* Posts */
-.postName {
+.postsWrapper {
+  align-content: center;
+}
+
+.mainPostImg {
+  display: block;
+  margin: 0 auto;
+  max-height: 75vh;
+  margin-top: 3%;
+  border: solid 3px aqua;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.postHeader {
   color: white;
+  font-size: 50px;
+  margin-top: 6%;
+  margin-bottom: 6%;
+}
+
+.postParagraph {
+  color: white;
+  max-width: 70vw;
+  margin: 0 auto;
+  font-size: 25px;
+  margin-bottom: 6%;
+}
+
+.postImg {
+  display: block;
+  margin: 0 auto;
+  max-height: 65vh;
+  margin-top: 3%;
+  border: solid 3px aqua;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 6%;
 }
 /* Posts */
+
+/* Admin */
+.adminAddForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 40%;
+  margin: 0 auto;
+}
+
+.adminAddLabel {
+  color: white;
+  margin-top: 5%;
+}
+
+.adminAddButton {
+  margin-top: 5%;
+}
+/* Admin */

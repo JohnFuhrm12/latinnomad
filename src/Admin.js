@@ -26,16 +26,20 @@ const db = firebase.firestore();
 function Admin( {...props} ) {
 
     const [posts, setPosts] = useState([]);
+    let today = new Date().toLocaleDateString();
+
+    const [currentUpload, setCurrentUpload] = useState('');
 
     // Main Info
     const [title, setTitle] = useState('');
-    const [country, setCountry] = useState('');
+    const [country, setCountry] = useState('Colombia');
     const [header, setHeader] = useState('');
     const [para1, setPara1] = useState('');
     const [para2, setPara2] = useState('');
 
     // Header Img
     const [imageUrl, setImageUrl] = useState();
+    const [imageUrl1, setImageUrl1] = useState();
     const [imageSelected, setImageSelected] = useState("");
     const [imageAwaiting, setImageAwaiting] = useState(false);
 
@@ -59,9 +63,10 @@ function Admin( {...props} ) {
   const addPost = async (e) => {
     e.preventDefault();
     await setDoc(doc(db, 'posts', title), {
-      headerImg: imageUrl,
+      headerImg: imageUrl1,
       postName: title,
       postCountry: country,
+      dateCreated: today,
 
       postHeader: header,
       postParagraph1: para1,
@@ -84,7 +89,7 @@ function Admin( {...props} ) {
       fifthImg: imageUrl5
     });
     setTitle('');
-    setCountry('');
+    setCountry('Colombia');
     setImageAwaiting(false);
     setHeader('');
     setPara1('');
@@ -95,11 +100,25 @@ function Admin( {...props} ) {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", imageSelected);
-    formData.append("upload_preset", "ReactDharma");
+    formData.append("upload_preset", "LatinNomad");
 
     axios.post("https://api.cloudinary.com/v1_1/dvmw658s9/image/upload", formData).then((response) => {
       console.log(response);
-      setImageUrl(response.data.url);
+      if (currentUpload === 'HeaderImage') {
+        setImageUrl1(response.data.url);
+      }
+      if (currentUpload === 'Image2') {
+        setImageUrl2(response.data.url);
+      }
+      if (currentUpload === 'Image3') {
+        setImageUrl3(response.data.url);
+      }
+      if (currentUpload === 'Image4') {
+        setImageUrl4(response.data.url);
+      }
+      if (currentUpload === 'Image5') {
+        setImageUrl5(response.data.url);
+      }
     });
 
     setImageSelected("");
@@ -127,7 +146,89 @@ function Admin( {...props} ) {
             <h1 className='navbarItem'>About</h1>
         </div>
     </div>
-    <h2 className='mainCatTitle'>Admin</h2>
+    <h2 className='mainCatTitle'>Add Post</h2>
+    <div>
+        <form className='adminAddForm' onSubmit={addPost}>
+            <label className='adminAddLabel' for="category">Country:</label>
+            <select className='adminInput' onChange={(e) => {setCountry(e.target.value)}} name="country">
+                <option value={'tortas'}>Colombia</option>
+                <option value={'tartas'}>Mexico</option>
+                <option value={'salado'}>Argentina</option>
+            </select>   
+                <label className='adminAddLabel' for="title">Post Title:</label>
+                <input className='adminInput' onChange={(e) => {setTitle(e.target.value)}} name='title' value={title}/>
+
+                <label className='adminAddLabel' for="imageUpload">Header Image:</label>
+                <input name="imageUpload" type="file" onChange={(event) => {
+                    setImageSelected(event.target.files[0]);
+                    setCurrentUpload('HeaderImage');
+                }}></input>
+                <button className='uploadButton' onClick={uploadImage}>Upload</button>
+
+                <label className='adminAddLabel' for="header">Post Header:</label>
+                <input className='adminInput' onChange={(e) => {setHeader(e.target.value)}} name='header' value={header}/>
+
+                <label className='adminAddLabel' for="para1">Paragraph 1:</label>
+                <textarea className='adminInputDesc' onChange={(e) => {setPara1(e.target.value)}} name='para1' value={para1}/>
+
+                <label className='adminAddLabel' for="para2">Paragraph 2:</label>
+                <textarea className='adminInputDesc' onChange={(e) => {setPara2(e.target.value)}} name='para2' value={para2}/>
+
+                <label className='adminAddLabel' for="header2">Post Header 2:</label>
+                <input className='adminInput' onChange={(e) => {setHeader2(e.target.value)}} name='header2' value={header2}/>
+
+                <label className='adminAddLabel' for="para3">Paragraph 3:</label>
+                <textarea className='adminInputDesc' onChange={(e) => {setPara3(e.target.value)}} name='para3' value={para3}/>
+
+                <label className='adminAddLabel' for="imageUpload2">Second Image:</label>
+                <input name="imageUpload2" type="file" onChange={(event) => {
+                    setImageSelected(event.target.files[0]);
+                    setCurrentUpload('Image2');
+                }}></input>
+                <button className='uploadButton' onClick={uploadImage}>Upload</button>
+
+                <label className='adminAddLabel' for="header3">Post Header 3:</label>
+                <input className='adminInput' onChange={(e) => {setHeader3(e.target.value)}} name='header3' value={header3}/>
+
+                <label className='adminAddLabel' for="para4">Paragraph 4:</label>
+                <textarea className='adminInputDesc' onChange={(e) => {setPara4(e.target.value)}} name='para4' value={para4}/>
+
+                <label className='adminAddLabel' for="imageUpload3">Third Image:</label>
+                <input name="imageUpload3" type="file" onChange={(event) => {
+                    setImageSelected(event.target.files[0]);
+                    setCurrentUpload('Image3');
+                }}></input>
+                <button className='uploadButton' onClick={uploadImage}>Upload</button>
+
+                <label className='adminAddLabel' for="header4">Post Header 4:</label>
+                <input className='adminInput' onChange={(e) => {setHeader4(e.target.value)}} name='header4' value={header4}/>
+
+                <label className='adminAddLabel' for="para5">Paragraph 5:</label>
+                <textarea className='adminInputDesc' onChange={(e) => {setPara5(e.target.value)}} name='para5' value={para5}/>
+
+                <label className='adminAddLabel' for="imageUpload4">Fourth Image:</label>
+                <input name="imageUpload4" type="file" onChange={(event) => {
+                    setImageSelected(event.target.files[0]);
+                    setCurrentUpload('Image4');
+                }}></input>
+                <button className='uploadButton' onClick={uploadImage}>Upload</button>
+
+                <label className='adminAddLabel' for="header5">Post Header 5:</label>
+                <input className='adminInput' onChange={(e) => {setHeader5(e.target.value)}} name='header5' value={header5}/>
+
+                <label className='adminAddLabel' for="para6">Paragraph 6:</label>
+                <textarea className='adminInputDesc' onChange={(e) => {setPara6(e.target.value)}} name='para6' value={para6}/>
+
+                <label className='adminAddLabel' for="imageUpload5">Fifth Image:</label>
+                <input name="imageUpload5" type="file" onChange={(event) => {
+                    setImageSelected(event.target.files[0]);
+                    setCurrentUpload('Image5');
+                }}></input>
+                <button className='uploadButton' onClick={uploadImage}>Upload</button>
+
+                <button className='adminAddButton'>Post</button>
+        </form>
+    </div>
     <div className='footer'>
         <h2 className='footerItem'>Latin Nomad</h2>
       </div>

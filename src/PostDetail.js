@@ -69,10 +69,27 @@ function PostDetail( {...props} ) {
     {post.map((postInfo) => {
         return (
             <>
-              <img className='mainPostPhoto' src={postInfo.PostImg}/>
-              <h2 className='mainCatTitle'>{postInfo.postName}</h2>
               <div className='postsWrapper'>
-                <p className='postParagraph'>{postInfo.PostParagraph1}</p>
+                <img className='mainPostImg' src={postInfo.headerImg}/>
+                <h1 className='postHeader'>{postInfo.postHeader}</h1>
+                <p className='postParagraph'>{postInfo.postParagraph1}</p>
+                <p className='postParagraph'>{postInfo.postParagraph2}</p>
+
+                <h2 className='postHeader'>{postInfo.secondHeader}</h2>
+                <p className='postParagraph'>{postInfo.postParagraph3}</p>
+                <img className='postImg' src={postInfo.secondImg}/>
+
+                <h2 className='postHeader'>{postInfo.thirdHeader}</h2>
+                <p className='postParagraph'>{postInfo.postParagraph4}</p>
+                <img className='postImg' src={postInfo.thirdImg}/>
+
+                <h2 className='postHeader'>{postInfo.fourthHeader}</h2>
+                <p className='postParagraph'>{postInfo.postParagraph5}</p>
+                <img className='postImg' src={postInfo.fourthImg}/>
+
+                <h2 className='postHeader'>{postInfo.fifthHeader}</h2>
+                <p className='postParagraph'>{postInfo.postParagraph6}</p>
+                <img className='postImg' src={postInfo.fifthImg}/>
               </div>
             </>
         )
